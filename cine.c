@@ -24,12 +24,15 @@ int main()
     bool COVID;
 
     generar_sala(); // Se marcan todos los asientos como desocupados.
-    mostrar_sala(); // Mostrar por pantalla y ubicacion de los asientos al usuario.
     
-    printf("Bienvenido a CinePlanet.\n");
+    printf("Bienvenido a CinePlanet.\n\n");
+    
+    mostrar_sala(); // Mostrar por pantalla y ubicacion de los asientos al usuario.
     
     do
     {
+    
+    
     
     /*Funcion menu encargada de recibir la opcion y devolver
       eleccion a la funcion principal*/
@@ -158,7 +161,7 @@ int menu()
     printf("4. Mostrar columna del asiento que este menos ocupada de la sala\n");
     printf("5. Salir\n");
 
-    printf("Ingresa la opcion a ejecutar: ");
+    printf("\nIngresa la opcion a ejecutar: ");
 
     do // Se debe ingresar un numero entre 1 y 5, inclusive.
     {
@@ -177,23 +180,28 @@ bool recursos(int *dinero, int *entradas)
 
     int efectivo, boletos;
 
+	if(ocupacion_actual == 12)
+	{
+		printf("No se encuentran asientos disponibles debido al protocolo COVID.\n");
+		return false;
+	}
     printf("\nEscogiste la opcion de reservar asiento, mostraremos la tabla de precios.\n\n");
     printf("\nFila    Precio\n");
     printf("\nA - B   3.500$\n");
     printf("\nC - D   2.000$\n");
     printf("\n  E     1.000$\n");
 
-    printf("Ahora debes ingresar la cantidad de entradas a comprar y tu dinero disponible.\n\n");
+    printf("\nAhora debes ingresar la cantidad de entradas a comprar y tu dinero disponible.\n");
 
     do
     {
     
-        printf("Ingresa tu dinero disponible: ");
+        printf("\nIngresa tu dinero disponible: ");
         scanf("%d", &efectivo);
 
         do
         {
-            printf("Ingresa la cantidad de entradas a comprar:" );
+            printf("\nIngresa la cantidad de entradas a comprar:" );
             scanf("%d", &boletos);
 
 	
@@ -234,7 +242,7 @@ void reservas(int *dinero, int *entradas)
        dentro de la matriz.*/  
 
 
-    printf("\nEntradas = %d\nDinero = %d\n", boletos, efectivo);
+    printf("\nEntradas por comprar: %d\nDinero disponible: %d\n", boletos, efectivo);
 	mostrar_sala();
     do
     {
@@ -445,6 +453,7 @@ void eliminar_reserva()
     else if(sala[fila][columna-1] == 'X')
     {
         sala[fila][columna-1] = '-';
+        ocupacion_actual -= 1;
         mostrar_sala();
     }
     
